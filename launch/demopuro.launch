@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find ros_speech_recognition)/launch/speech_recognition.launch">
+    </include>
+    
+</launch>
+
+
