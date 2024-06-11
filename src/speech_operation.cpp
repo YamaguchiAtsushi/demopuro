@@ -22,9 +22,9 @@ void speechCallback(const speech_recognition_msgs::SpeechRecognitionCandidates::
     for (const auto& str : msg->transcript) {
         ss << str << " ";
     }
-    ROS_INFO("I heard: [%s]", ss.str().c_str());
+    //ROS_INFO("I heard: [%s]", ss.str().c_str());
     ROS_INFO("transcript: %s", msg->transcript[0].c_str());
-    ROS_INFO("confidence: %f", msg->confidence);
+    //ROS_INFO("confidence: %f", msg->confidence);
 
 }
 
@@ -36,12 +36,21 @@ int main(int argc, char** argv)
   ros::Subscriber sub = nh.subscribe("speech_to_text", 10, speechCallback);
   ros::Rate loop_rate(100);
 
+
   while (ros::ok())
   {
     //std_msgs::String msg;
     //msg.data = "hello world!";
-    ROS_INFO("publish: %s", msg.data.c_str());
-    chatter_pub.publish(msg);
+    char key;
+
+    std::cin >> key;
+
+    if (key == 'q'){
+      ROS_INFO("publish: %s", msg.data.c_str());
+      chatter_pub.publish(msg);
+    }
+
+    //ROS_INFO("publish: %s", msg.data.c_str());
 
     ros::spinOnce();
     loop_rate.sleep();
